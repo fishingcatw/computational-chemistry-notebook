@@ -1,0 +1,29 @@
+{
+  "name": "Yanqing Fang",
+  "nameZh": "方彦青",
+  "handle": "yanqingfang",
+  "focus": "Computational Chemistry",
+  "tagline": "AI for Science · Agent Evaluation",
+  "portrait": "images/avatar-cat.jpg",
+  "portraitAlt": "蓝眼睛白猫，身后是海岸与草地",
+  "portraitSource": null,
+  "email": null,
+  "affiliation": null,
+  "scholar": null,
+  "orcid": null,
+  "biography": [
+    "我是方彦青，目前关注计算化学与材料领域的 Agent 评测，探索智能体在真实计算研究中的问题求解、工具使用与结果验证能力。",
+    "我正在逐步建立覆盖分子量子化学、材料模拟与数据驱动建模的研究任务，关注计算结果的正确性、可复现性与科研工作流的可靠性。",
+    "这里记录题目内容、中文解读、评测结果与执行 traces。所有正式结果将在完成独立验证后发布，目前的题目条目为草稿示例。"
+  ],
+  "interests": ["Molecular Simulation", "Materials Modeling", "Scientific Agent Evaluation"],
+  "links": [],
+  "updates": [
+    { "date": "2026.11", "text": "研究档案开始搭建，首批方向与题目结构已预留。正式题目与运行结果将逐步补充。", "type": "网站更新" }
+  ],
+  "resources": [
+    { "title": "QCArchive", "description": "量子化学计算与数据", "url": "https://www.qcarchive.molssi.org/" },
+    { "title": "ASE", "description": "原子尺度模拟工具", "url": "https://ase-lib.org/" },
+    { "title": "Materials Project", "description": "计算材料数据与探索", "url": "https://materialsproject.org/" }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "version": "0.1.0",
+  "updatedAt": "2026-11-11",
+  "taxonomyVersion": "2026-11-five-domains",
+  "modules": [
+    { "id": "molecular", "number": "01", "title": "量子化学、分子结构与性质", "english": "Quantum Chemistry, Molecular Structure & Properties", "description": "电子结构、构象、非共价作用、光谱与性质反演。", "tags": ["电子结构", "构象", "非共价作用", "光谱", "性质反演"], "icon": "molecule" },
+    { "id": "reactions", "number": "02", "title": "反应机理、动力学与催化", "english": "Reaction Mechanisms, Kinetics & Catalysis", "description": "过渡态、反应路径、反应热力学、速率与选择性。", "tags": ["过渡态", "反应路径", "反应热力学", "速率", "选择性"], "icon": "reaction" },
+    { "id": "dynamics", "number": "03", "title": "分子模拟、统计力学与自由能", "english": "Molecular Simulation, Statistical Mechanics & Free Energy", "description": "MD／MC、溶剂化、输运、增强采样与自由能计算。", "tags": ["MD / MC", "溶剂化", "输运", "增强采样", "自由能计算"], "icon": "wave" },
+    { "id": "materials", "number": "04", "title": "材料、表面与界面设计", "english": "Materials, Surface & Interface Design", "description": "晶体、缺陷、相稳定性、吸附、界面与材料逆向设计。", "tags": ["晶体", "缺陷", "相稳定性", "吸附", "界面", "材料逆向设计"], "icon": "crystal" },
+    { "id": "learning", "number": "05", "title": "Foundation Model", "english": "Foundation Model R&D for Computational Chemistry", "description": "通用原子势、三维分子表征、多精度预训练，以及数据、架构和训练策略优化。", "tags": ["通用原子势", "三维分子表征", "多精度预训练", "数据优化", "架构设计", "训练策略"], "icon": "network" }
+  ],
+  "taskDirections": [
+    { "id": "frontier", "number": "01", "title": "前沿求解", "english": "Frontier Problem Solving", "description": "有明确答案或验收条件，考查科学推理、建模与求解。", "icon": "search" },
+    { "id": "research", "number": "02", "title": "开放研究与优化", "english": "Open Research & Optimization", "description": "无唯一解，考查方案提出、实验迭代与可验证的性能提升。", "icon": "layers" },
+    { "id": "workflow", "number": "03", "title": "专业软件与工作流", "english": "Scientific Software & Workflows", "description": "考查工具协同、编程、排错及端到端可靠交付。", "icon": "code" }
+  ],
+  "tasks": [
+    {
+      "id": "CHEM-001", "module": "molecular", "slug": "conformer-search", "title": "构象搜索与相对能量排序", "english": "Conformer Search & Relative Energies", "track": "专业软件与工作流", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": true,
+      "summary": "在有限计算预算内寻找低能构象，并为相对能量排序提供可信证据。",
+      "prompt": "Given a set of molecular structures and a fixed level of theory, identify distinct low-energy conformers and establish a reproducible relative-energy ranking within the specified computational budget.",
+      "objective": "识别不同的低能构象，在统一计算方法下比较相对能量，并检查结构与计算收敛性。",
+      "inputs": ["分子结构与电子态：待补充", "理论水平与基组：待冻结", "计算预算与结构去重规则：待标定"],
+      "deliverables": ["候选与优化后的结构文件", "相对能量表及计算设置", "可重跑脚本与收敛性证据"],
+      "criteria": ["化学组成、立体化学与电子态正确", "在相同理论水平下比较能量", "参考构象覆盖与排序误差满足待标定阈值"],
+      "explanation": "这不是只找一个最低的能量数字。Agent 需要决定如何生成、筛选和去重构象，识别未收敛或不合理结构，再用统一计算条件建立可以复核的排序。",
+      "steps": ["理解结构与约束", "生成并去重候选构象", "初筛后统一精修", "检查收敛并组织证据"],
+      "caveat": "电子能排序不等于有限温度自由能占比；当前条目仅为题型草稿，不含可运行题库或已验证参考解。",
+      "tools": ["RDKit", "xTB", "PySCF"],
+      "sources": [{"label": "QCArchive · 数据与计算规格参考", "url": "https://docs.qcarchive.molssi.org/user_guide/datasets/basics.html"}]
+    },
+    {
+      "id": "CHEM-002", "module": "reactions", "slug": "transition-state", "title": "过渡态搜索与反应路径验证", "english": "Transition States & Pathway Validation", "track": "前沿求解", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": false,
+      "summary": "寻找连接指定反应端点的过渡态，验证反应路径而不只报告势垒。",
+      "prompt": "Locate a transition state connecting the specified reactant and product. Verify the saddle point and pathway connectivity before reporting the activation barrier under a fixed computational protocol.",
+      "objective": "定位指定异构化过程的一阶鞍点，并用端点连通性支撑反应势垒。",
+      "inputs": ["反应物与产物结构：待补充", "电荷、自旋与理论水平：待冻结", "路径搜索预算：待标定"],
+      "deliverables": ["过渡态结构与振动信息", "路径或 IRC 验证产物", "势垒计算与可重跑脚本"],
+      "criteria": ["反应前后组成守恒", "鞍点及反应方向合理", "两端连接正确且能量定义一致"],
+      "explanation": "一个虚频不是充分证据。关键在于找到的鞍点是否对应题目要求的反应，以及路径是否真正连接指定端点。",
+      "steps": ["确认端点与电子态", "构造初始反应路径", "搜索并验证鞍点", "检查连通性和势垒"],
+      "caveat": "热修正、温度与标准态尚待定义；不得把电子能势垒直接解释为自由能势垒。",
+      "tools": ["ASE", "PySCF", "Psi4"],
+      "sources": [{"label": "GMTKN55 · 势垒与能量基准参考", "url": "https://www.chemie.uni-bonn.de/grimme/de/software/gmtkn/gmtkn55"}]
+    },
+    {
+      "id": "MAT-001", "module": "materials", "slug": "convergence-audit", "title": "第一性原理计算的收敛性诊断", "english": "First-principles Convergence Audit", "track": "专业软件与工作流", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": false,
+      "summary": "诊断看似正常的计算输出，补充足以支持目标性质的收敛证据。",
+      "prompt": "Audit the supplied first-principles calculation. Identify insufficient convergence or inconsistent settings, and produce a verified result without changing the scientific problem.",
+      "objective": "区分程序正常结束与结果物理可信，在固定目标下完成必要补算。",
+      "inputs": ["晶体、输入与日志：待补充", "目标性质与误差容差：待定义", "计算方法及资源条件：待冻结"],
+      "deliverables": ["修正后的计算输入", "参数收敛测试及日志", "可复核的目标性质与诊断说明"],
+      "criteria": ["不改变原始物理问题", "计算条件一致并达到收敛要求", "修复对隐藏实例有效"],
+      "explanation": "Agent 必须检查电子态、磁态、网格及收敛，而不是把正常退出码当作科学验证。",
+      "steps": ["审查输入与日志", "定位不充分证据", "选择必要补算", "验证目标物理量"],
+      "caveat": "材料与性质不同，所需精度不同；阈值需要参考计算标定。",
+      "tools": ["Quantum ESPRESSO", "ASE", "pymatgen"],
+      "sources": [{"label": "MatFlowBench · 工作流设计参考（非本题来源）", "url": "https://matflowbench.com/#workflows"}]
+    },
+    {
+      "id": "MAT-002", "module": "materials", "slug": "equation-of-state", "title": "预算约束下的状态方程研究", "english": "Budgeted Equation-of-state Study", "track": "前沿求解", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": true,
+      "summary": "自主选择计算点，估计平衡体积和体模量，并判断证据是否充分。",
+      "prompt": "Choose additional energy-volume calculations under a limited budget. Estimate the equilibrium volume and bulk modulus, and assess whether the available evidence supports your conclusion.",
+      "objective": "以有限的计算点，得到可信的状态方程及其适用范围。",
+      "inputs": ["初始晶体及能量—体积点：待补充", "计算或回放服务：待接入", "预算与参考条件：待标定"],
+      "deliverables": ["拟合程序与所用数据", "平衡体积和体模量估计", "计算点选择与残差分析"],
+      "criteria": ["拟合模型和体积区间合理", "隐藏体积点预测达到容差", "计算预算合规且产物可复现"],
+      "explanation": "Agent 不仅要拟合曲线，还要决定下一步在哪个体积补算，以及何时有足够证据停止。",
+      "steps": ["分析初始数据", "选择新的体积点", "拟合并检查残差", "验证并提交结论"],
+      "caveat": "如使用解析模拟或预计算回放，将明确标注，不等同于实测 DFT 能力。",
+      "tools": ["ASE", "SciPy", "DFT / Replay"],
+      "sources": [{"label": "JARVIS · 材料计算数据参考", "url": "https://jarvis.nist.gov/"}]
+    },
+    {
+      "id": "MD-001", "module": "dynamics", "slug": "diffusion-estimation", "title": "扩散系数估计与采样诊断", "english": "Diffusion Estimation & Sampling", "track": "专业软件与工作流", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": false,
+      "summary": "从轨迹中提取可靠的输运性质，检查周期边界与统计不确定性。",
+      "prompt": "Estimate the diffusion coefficient from molecular dynamics trajectories. Account for periodic boundaries, equilibration and correlated samples, and justify the fitting interval and uncertainty estimate.",
+      "objective": "获得具有统计依据的扩散系数，识别采样不足和分析偏差。",
+      "inputs": ["轨迹与拓扑：待补充", "温度、系综与力场：待冻结", "补充采样预算：待确定"],
+      "deliverables": ["轨迹分析程序", "均方位移与拟合区间", "扩散估计及不确定性说明"],
+      "criteria": ["正确处理周期边界与平衡段", "拟合区间合理", "统计量与独立参考重复相容"],
+      "explanation": "重点不在画出一条直线，而在判断这条直线对应的时间尺度与样本是否足以支持扩散结论。",
+      "steps": ["审查轨迹条件", "处理边界与平衡", "选择扩散时间区间", "估计误差与采样需求"],
+      "caveat": "随机模拟按统计容差验收，不要求复现单个精确小数。",
+      "tools": ["LAMMPS", "MDAnalysis", "NumPy"], "sources": []
+    },
+    {
+      "id": "SURF-001", "module": "materials", "slug": "adsorption-search", "title": "吸附位点搜索与候选验证", "english": "Adsorption-site Search", "track": "前沿求解", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": false,
+      "summary": "在有限计算预算内搜索合理吸附位点，并用一致参考定义比较候选。",
+      "prompt": "Explore candidate adsorption sites for a specified adsorbate and surface. Relax the candidates, compare adsorption energies using consistent references and validate the recommended structures.",
+      "objective": "比较合法吸附候选，给出有计算证据的筛选结果。",
+      "inputs": ["表面与吸附物：待补充", "参考态与结构约束：待定义", "计算预算：待标定"],
+      "deliverables": ["候选及弛豫结构", "统一参考下的吸附能", "搜索策略与验证产物"],
+      "criteria": ["结构与位点合法", "能量参考一致", "推荐候选存在确认计算"],
+      "explanation": "不仅要搜索低能位点，还要确认搜索过程没有改变题目约束，结果不是无依据的猜测。",
+      "steps": ["分析表面约束", "生成候选位点", "弛豫和比较", "确认候选并报告"],
+      "caveat": "吸附能是代理指标，不等于真实催化活性、选择性或寿命。",
+      "tools": ["ASE", "DFT", "ML potentials"],
+      "sources": [{"label": "Open Catalyst Project · 数据与基线参考", "url": "https://opencatalystproject.org/"}]
+    },
+    {
+      "id": "ML-001", "module": "learning", "slug": "potential-generalization", "title": "机器学习原子势的泛化改进", "english": "Generalizable Atomistic Potentials", "track": "开放研究与优化", "status": "draft", "version": "0.1-draft", "difficulty": null, "featured": false,
+      "summary": "从可运行基线出发，改善隐藏条件下的能量、力与模拟稳定性。",
+      "prompt": "Improve a supplied atomistic potential within a fixed training budget. Submit reproducible training code and evaluate energy, force and simulation behavior on held-out configurations.",
+      "objective": "改进模型而非仅提高公开分数，检查物理约束与隐藏泛化。",
+      "inputs": ["数据与分组策略：待冻结", "基线及可修改文件：待补充", "预训练权限与训练预算：待规定"],
+      "deliverables": ["可复现训练代码", "数据和训练配置", "误差分析与模拟检查"],
+      "criteria": ["可信环境重训成功", "隐藏能量与力误差", "物理一致性和模拟稳定性"],
+      "explanation": "Agent 需要理解误差来源，选择改模型、数据还是训练方法，并证明改进可以迁移到未见条件。",
+      "steps": ["复现基线", "分析误差与分布", "迭代模型或数据", "独立重训与隐藏验证"],
+      "caveat": "预训练与从零训练应分轨比较；单分子任务不代表跨化学空间通用能力。",
+      "tools": ["PyTorch", "MACE", "ASE"],
+      "sources": [{"label": "rMD17 · 轨迹能量与力数据参考", "url": "https://archive.materialscloud.org/records/pfffs-fff86"}]
+    }
+  ]
+}

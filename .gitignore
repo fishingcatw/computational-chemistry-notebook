@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.reference/
+.playwright-cli/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+site.zip
+.backups/
+.codebuddy/
+.github-export/
+/*.txt
+*.zip

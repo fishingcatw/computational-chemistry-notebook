@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "taskId": "CHEM-001",
+  "runId": "layout-example-only",
+  "isExample": true,
+  "events": [
+    { "id": "01", "type": "task", "title": "读取研究任务", "time": "示例步骤 01", "content": "此处展示题面、输入条件与任务约束。仅用于演示版式，不是模型的实际输出。" },
+    { "id": "02", "type": "tool", "title": "调用计算工具", "time": "示例步骤 02", "content": "此处展示经脱敏的工具名称、输入摘要与调用参数。未执行真实工具。" },
+    { "id": "03", "type": "observation", "title": "接收环境反馈", "time": "示例步骤 03", "content": "此处展示可公开的计算日志、工具结果或产物说明。没有真实计算数据。" },
+    { "id": "04", "type": "verifier", "title": "汇总评测证据", "time": "示例步骤 04", "content": "此处展示允许发布的判定与诊断摘要。不包含私有真值、隐藏测试或凭据。" }
+  ]
+}
